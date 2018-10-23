@@ -1,7 +1,8 @@
-import { Switch, Route } from 'react-router-dom';
+import React from 'react';
 import { withRouter } from 'react-router';
+import { Switch, Route } from 'react-router-dom';
 
-import { Consumer, find,map } from './utils';
+import { Consumer, find, map } from './utils';
 
 class RouteView extends React.Component {
   static DefaultRoute = Route;
@@ -14,15 +15,13 @@ class RouteView extends React.Component {
 
           let renderRoutes = [];
           if (currentRoute) {
-            renderRoutes = currentRoute.route.children;
-          } else if (this.props.match.path === routePrefix) {
-            renderRoutes = routes;
+            renderRoutes = currentRoute.route.children || [];
           }
 
           return (
             <Switch>
-              {map(renderRoutes, (v, i) => (
-                <RouteView.DefaultRoute {...v} key={v.path || i} />
+              {map(renderRoutes, ({ children, ...props }, i) => (
+                <RouteView.DefaultRoute {...props} key={props.path || i} />
               ))}
             </Switch>
           );

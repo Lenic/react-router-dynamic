@@ -72,7 +72,7 @@ export function refreshRoutePrefix(routes, routePrefix, callback) {
 
         isFunction(callback) && callback(v, routePrefix);
 
-        refreshRoutePrefix(v.children, v.path);
+        refreshRoutePrefix(v.children || [], v.path);
       }
     }
   });
