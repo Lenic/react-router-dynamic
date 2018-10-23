@@ -1,0 +1,24 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "49",
+          "ie": "11"
+        },
+        "modules": "cjs"
+      }
+    ]
+  ],
+  "comments": false,
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ]
+  ]
+}

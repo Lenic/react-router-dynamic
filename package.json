@@ -1,0 +1,35 @@
+{
+  "name": "@lenic/react-router-dynamic",
+  "version": "1.0.0",
+  "description": "Use config for react router 4.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib --source-maps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Lenic/react-router-dynamic.git"
+  },
+  "keywords": [
+    "react",
+    "router",
+    "config",
+    "dynamic"
+  ],
+  "author": {
+    "name": "Lenic Rayleigh",
+    "email": "lenic@live.cn"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lenic/react-router-dynamic/issues"
+  },
+  "homepage": "https://github.com/Lenic/react-router-dynamic#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0"
+  }
+}

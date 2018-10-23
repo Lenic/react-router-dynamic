@@ -1,6 +1,6 @@
-lib/
+src/
 node_modules/
 
-!.gitkeep
+.gitkeep
 .DS_Store
 yarn-error.log
