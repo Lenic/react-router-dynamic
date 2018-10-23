@@ -1,25 +1,39 @@
+import React from 'react';
 import { withRouter } from 'react-router';
+import { HashRouter as Router, Switch } from 'react-router-dom';
 
-import { Provider, matchRoutes, refreshRoutePrefix } from './utils';
+import RouteView from './route-view';
+import { Provider, matchRoutes, refreshRoutePrefix, map } from './utils';
 
 let matchedRoutes = [],
   matchedRoutesPathName = null;
 
-export default (routes, { routePrefix = '/', callback = null }) => Component => {
+export default (routes, { routePrefix = '/', callback = null, router = Router } = {}) => {
   refreshRoutePrefix(routes, routePrefix, callback);
 
-  const ComponentWithRouter = withRouter(Component);
+  const routesRender = props => {
+    const pathname = props.location ? props.location.pathname : null;
 
-  return props => {
-    if (matchedRoutesPathName !== props.location.pathname) {
-      matchedRoutesPathName = props.location.pathname;
+    if (matchedRoutesPathName !== pathname) {
+      matchedRoutesPathName = pathname;
       matchedRoutes = matchRoutes(routes, matchedRoutesPathName);
     }
 
     return (
       <Provider value={{ routes, routePrefix, matched: matchedRoutes }}>
-        <ComponentWithRouter {...props} />
+        <Switch>
+          {map(routes, ({ children, ...props }, i) => (
+            <RouteView.DefaultRoute {...props} key={props.path || i} />
+          ))}
+        </Switch>
       </Provider>
     );
   };
+
+  const DefaultRouter = router;
+  return (
+    <DefaultRouter>
+      {React.createElement(withRouter(routesRender))}
+    </DefaultRouter>
+  );
 };
