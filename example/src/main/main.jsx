@@ -4,7 +4,7 @@ import RouteView from '../../../';
 
 import Breadcrumb from './breadcrumb';
 
-class Main extends React.Component {
+class Main extends React.PureComponent {
   logoutHandler() {
     this.props.history.push('/login');
   }

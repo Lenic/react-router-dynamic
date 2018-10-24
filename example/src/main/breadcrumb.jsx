@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { DynamicConsumer } from '../../../';
 
-export default class Breadcrumb extends React.Component {
+export default class Breadcrumb extends React.PureComponent {
   render() {
     return (
       <div>

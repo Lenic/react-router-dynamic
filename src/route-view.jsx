@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Consumer, find, map } from './utils';
 
-class RouteView extends React.Component {
+class RouteView extends React.PureComponent {
   static DefaultRoute = Route;
 
   render() {

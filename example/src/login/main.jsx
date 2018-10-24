@@ -1,4 +1,4 @@
-class Main extends React.Component {
+class Main extends React.PureComponent {
   submitHandler() {
     this.props.history.push('/');
   }
