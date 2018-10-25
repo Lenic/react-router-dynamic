@@ -5,28 +5,30 @@ import { Switch, Route } from 'react-router-dom';
 import { Consumer, find, map } from './utils';
 
 class RouteView extends React.PureComponent {
-  static DefaultRoute = Route;
+  static Render = props => React.createElement(Route, props);
 
   render() {
+    const { match: { path } } = this.props;
+
     return (
-      <Consumer>
-        {({ routes, matched, routePrefix }) => {
-          const currentRoute = find(matched, v => this.props.match.path === v.match.path);
+      <Switch>
+        <Consumer>
+          {
+            ({ routes, matched, routePrefix }) => {
+              const currentRoute = find(matched, v => path === v.match.path);
 
-          let renderRoutes = [];
-          if (currentRoute) {
-            renderRoutes = currentRoute.route.children || [];
+              let renderRoutes = [];
+              if (currentRoute) {
+                renderRoutes = currentRoute.route.children || [];
+              }
+
+              return map(renderRoutes, ({ children, ...props }, i) => (
+                <RouteView.Render {...props} key={props.path || i} />
+              ));
+            }
           }
-
-          return (
-            <Switch>
-              {map(renderRoutes, ({ children, ...props }, i) => (
-                <RouteView.DefaultRoute {...props} key={props.path || i} />
-              ))}
-            </Switch>
-          );
-        }}
-      </Consumer>
+        </Consumer>
+      </Switch>
     );
   }
 }

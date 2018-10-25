@@ -23,7 +23,7 @@ export default (routes, { routePrefix = '/', callback = null, router = Router } 
       <Provider value={{ routes, routePrefix, matched: matchedRoutes }}>
         <Switch>
           {map(routes, ({ children, ...props }, i) => (
-            <RouteView.DefaultRoute {...props} key={props.path || i} />
+            <RouteView.Render {...props} key={props.path || i} />
           ))}
         </Switch>
       </Provider>

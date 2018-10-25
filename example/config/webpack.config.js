@@ -9,11 +9,11 @@ function getPath(dir) {
 module.exports = {
   mode: 'development',
   devtool: false,
-  entry: getPath('src/index.js'),
+  entry: getPath('example/src/index.js'),
   output: {
     publicPath: '/',
     filename: 'js/[name].js',
-    path: getPath('dist'),
+    path: getPath('example/dist'),
     chunkFilename: 'js/chunks/[id].js',
   },
   module: {
@@ -27,6 +27,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@lenic/react-router-dynamic': getPath('src'),
+    },
   },
   plugins: [
     new webpack.NamedChunksPlugin(),
@@ -35,7 +38,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Dynamic React Router Demo',
-      template: getPath('config/index.html'),
+      template: getPath('example/config/index.html'),
     }),
   ],
 };
