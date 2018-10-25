@@ -4,8 +4,10 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Consumer, find, map } from './utils';
 
+let DefaultRender = props => React.createElement(Route, props);
+
 class RouteView extends React.PureComponent {
-  static Render = props => React.createElement(Route, props);
+  static setRender = render => DefaultRender = render;
 
   render() {
     const { match: { path } } = this.props;
@@ -23,7 +25,7 @@ class RouteView extends React.PureComponent {
               }
 
               return map(renderRoutes, ({ children, ...props }, i) => (
-                <RouteView.Render {...props} key={props.path || i} />
+                <DefaultRender {...props} key={props.path || i} />
               ));
             }
           }
@@ -34,3 +36,4 @@ class RouteView extends React.PureComponent {
 }
 
 export default withRouter(RouteView);
+export const getRender = () => DefaultRender;

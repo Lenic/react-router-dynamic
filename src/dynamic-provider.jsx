@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { HashRouter as Router, Switch } from 'react-router-dom';
 
-import RouteView from './route-view';
+import RouteView, { getRender } from './route-view';
 import { Provider, matchRoutes, refreshRoutePrefix, map } from './utils';
 
 let matchedRoutes = [],
@@ -19,11 +19,12 @@ export default (routes, { routePrefix = '/', callback = null, router = Router } 
       matchedRoutes = matchRoutes(routes, matchedRoutesPathName);
     }
 
+    const Render = getRender();
     return (
       <Provider value={{ routes, routePrefix, matched: matchedRoutes }}>
         <Switch>
           {map(routes, ({ children, ...props }, i) => (
-            <RouteView.Render {...props} key={props.path || i} />
+            <Render {...props} key={props.path || i} />
           ))}
         </Switch>
       </Provider>
