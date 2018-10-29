@@ -28,7 +28,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@lenic/react-router-dynamic': getPath('src'),
+      '@lenic/react-router-dynamic': getPath('lib'),
     },
   },
   plugins: [
