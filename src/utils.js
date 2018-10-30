@@ -65,14 +65,14 @@ export function matchRoutes(routes, pathname, /*not public API*/ branch = []) {
 export function refreshRoutePrefix(routes, routePrefix, callback) {
   each(routes, v => {
     if (v.path === undefined || v.path === null) {
-      refreshRoutePrefix(v.children || [], routePrefix);
+      refreshRoutePrefix(v.children || [], routePrefix, callback);
     } else {
       if (v.path.indexOf(routePrefix) !== 0) {
         v.path = `${routePrefix === '/' ? routePrefix : `${routePrefix}/`}${v.path}`;
 
         isFunction(callback) && callback(v, routePrefix);
 
-        refreshRoutePrefix(v.children || [], v.path);
+        refreshRoutePrefix(v.children || [], v.path, callback);
       }
     }
   });
