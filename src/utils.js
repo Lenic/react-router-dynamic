@@ -16,9 +16,9 @@ export const find = function find(list, fn) {
       return item;
     }
   }
-}
+};
 
-export const some = (list, fn) => !!find(list, fn)
+export const some = (list, fn) => !!find(list, fn);
 
 export const map = function map(list, fn) {
   const result = [];
@@ -28,17 +28,17 @@ export const map = function map(list, fn) {
   }
 
   return result;
-}
+};
 
 export const each = function each(list, fn) {
   for (let i = 0; i < list.length; i++) {
     fn(list[i]);
   }
-}
+};
 
 export const isFunction = function isFunction(fn) {
   return typeof fn === 'function';
-}
+};
 
 export function matchRoutes(routes, pathname, /*not public API*/ branch = []) {
   some(routes, route => {
@@ -65,7 +65,7 @@ export function matchRoutes(routes, pathname, /*not public API*/ branch = []) {
 export function refreshRoutePrefix(routes, routePrefix, callback) {
   each(routes, v => {
     if (v.path === undefined || v.path === null) {
-      refreshRoutePrefix(v.children, routePrefix);
+      refreshRoutePrefix(v.children || [], routePrefix);
     } else {
       if (v.path.indexOf(routePrefix) !== 0) {
         v.path = `${routePrefix === '/' ? routePrefix : `${routePrefix}/`}${v.path}`;

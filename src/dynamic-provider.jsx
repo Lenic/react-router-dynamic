@@ -32,9 +32,5 @@ export default (routes, { routePrefix = '/', callback = null, router = Router } 
   };
 
   const DefaultRouter = router;
-  return (
-    <DefaultRouter>
-      {React.createElement(withRouter(routesRender))}
-    </DefaultRouter>
-  );
+  return <DefaultRouter>{React.createElement(withRouter(routesRender))}</DefaultRouter>;
 };

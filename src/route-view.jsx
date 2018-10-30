@@ -7,30 +7,32 @@ import { Consumer, find, map } from './utils';
 let DefaultRender = props => React.createElement(Route, props);
 
 class RouteView extends React.PureComponent {
-  static setRender = render => DefaultRender = render;
+  static setRender = render => (DefaultRender = render);
 
   render() {
-    const { match: { path } } = this.props;
+    const {
+      match: { path }
+    } = this.props;
 
     return (
-      <Switch>
-        <Consumer>
-          {
-            ({ routes, matched, routePrefix }) => {
-              const currentRoute = find(matched, v => path === v.match.path);
+      <Consumer>
+        {({ routes, matched, routePrefix }) => {
+          const currentRoute = find(matched, v => path === v.match.path);
 
-              let renderRoutes = [];
-              if (currentRoute) {
-                renderRoutes = currentRoute.route.children || [];
-              }
-
-              return map(renderRoutes, ({ children, ...props }, i) => (
-                <DefaultRender {...props} key={props.path || i} />
-              ));
-            }
+          let renderRoutes = [];
+          if (currentRoute) {
+            renderRoutes = currentRoute.route.children || [];
           }
-        </Consumer>
-      </Switch>
+
+          return (
+            <Switch>
+              {map(renderRoutes, ({ children, ...props }, i) => (
+                <DefaultRender {...props} key={props.path || i} />
+              ))}
+            </Switch>
+          );
+        }}
+      </Consumer>
     );
   }
 }
